@@ -138,6 +138,7 @@ class LoginController: UIViewController {
         view.addSubview(profileImageView)
         view.addSubview(loginRegisterSegControl)
         
+        
         titleTextView.centerYAnchor.constraintEqualToAnchor(view.centerYAnchor,constant: -280).active = true
         titleTextView.bottomAnchor.constraintEqualToAnchor(profileImageView.topAnchor).active = true
         titleTextView.widthAnchor.constraintEqualToAnchor(view.widthAnchor).active = true

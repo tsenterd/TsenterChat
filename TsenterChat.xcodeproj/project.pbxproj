@@ -28,7 +28,7 @@
 /* Begin PBXFileReference section */
 		A00A1BD968EE8C7DD4B0EB03 /* Pods_Chat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Chat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC13D2EFDDD61F7D38A59BE3 /* Pods-Chat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Chat/Pods-Chat.debug.xcconfig"; sourceTree = "<group>"; };
-		DD1E57AE1D4D294B0075424C /* Chat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chat.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DD1E57AE1D4D294B0075424C /* TsenterChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TsenterChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD1E57B11D4D294B0075424C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DD1E57B31D4D294B0075424C /* MessagesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesController.swift; sourceTree = "<group>"; };
 		DD1E57B61D4D294B0075424C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -80,7 +80,7 @@
 		DD1E57A51D4D294B0075424C = {
 			isa = PBXGroup;
 			children = (
-				DD1E57B01D4D294B0075424C /* Chat */,
+				DD1E57B01D4D294B0075424C /* TsenterChat */,
 				DD1E57AF1D4D294B0075424C /* Products */,
 				24AFAF2E547855BCF9283C42 /* Pods */,
 				ABF8DDFB6C5C6F8EF6C20C39 /* Frameworks */,
@@ -90,12 +90,12 @@
 		DD1E57AF1D4D294B0075424C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				DD1E57AE1D4D294B0075424C /* Chat.app */,
+				DD1E57AE1D4D294B0075424C /* TsenterChat.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		DD1E57B01D4D294B0075424C /* Chat */ = {
+		DD1E57B01D4D294B0075424C /* TsenterChat */ = {
 			isa = PBXGroup;
 			children = (
 				DDC6455E1D4DCC9600E30EA4 /* View */,
@@ -109,6 +109,7 @@
 				DD1E57BD1D4D294B0075424C /* Info.plist */,
 				DD1E57C61D4D42B70075424C /* GoogleService-Info.plist */,
 			);
+			name = TsenterChat;
 			path = Chat;
 			sourceTree = "<group>";
 		};
@@ -153,9 +154,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		DD1E57AD1D4D294B0075424C /* Chat */ = {
+		DD1E57AD1D4D294B0075424C /* TsenterChat */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = DD1E57C01D4D294B0075424C /* Build configuration list for PBXNativeTarget "Chat" */;
+			buildConfigurationList = DD1E57C01D4D294B0075424C /* Build configuration list for PBXNativeTarget "TsenterChat" */;
 			buildPhases = (
 				9E8EEA59A41FA3387FF164C2 /* [CP] Check Pods Manifest.lock */,
 				DD1E57AA1D4D294B0075424C /* Sources */,
@@ -168,9 +169,9 @@
 			);
 			dependencies = (
 			);
-			name = Chat;
+			name = TsenterChat;
 			productName = Chat;
-			productReference = DD1E57AE1D4D294B0075424C /* Chat.app */;
+			productReference = DD1E57AE1D4D294B0075424C /* TsenterChat.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -185,10 +186,11 @@
 				TargetAttributes = {
 					DD1E57AD1D4D294B0075424C = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = 256P2VT6GB;
 					};
 				};
 			};
-			buildConfigurationList = DD1E57A91D4D294B0075424C /* Build configuration list for PBXProject "Chat" */;
+			buildConfigurationList = DD1E57A91D4D294B0075424C /* Build configuration list for PBXProject "TsenterChat" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -201,7 +203,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				DD1E57AD1D4D294B0075424C /* Chat */,
+				DD1E57AD1D4D294B0075424C /* TsenterChat */,
 			);
 		};
 /* End PBXProject section */
@@ -346,7 +348,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -386,7 +388,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -399,10 +401,11 @@
 			baseConfigurationReference = CC13D2EFDDD61F7D38A59BE3 /* Pods-Chat.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = Chat/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.davidtsenter.Chat;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.davidtsenter.TsenterChat;
+				PRODUCT_NAME = TsenterChat;
 			};
 			name = Debug;
 		};
@@ -411,17 +414,18 @@
 			baseConfigurationReference = E17E67142C13E3E4B41FF5D5 /* Pods-Chat.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = Chat/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.davidtsenter.Chat;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.davidtsenter.TsenterChat;
+				PRODUCT_NAME = TsenterChat;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		DD1E57A91D4D294B0075424C /* Build configuration list for PBXProject "Chat" */ = {
+		DD1E57A91D4D294B0075424C /* Build configuration list for PBXProject "TsenterChat" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DD1E57BE1D4D294B0075424C /* Debug */,
@@ -430,7 +434,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		DD1E57C01D4D294B0075424C /* Build configuration list for PBXNativeTarget "Chat" */ = {
+		DD1E57C01D4D294B0075424C /* Build configuration list for PBXNativeTarget "TsenterChat" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DD1E57C11D4D294B0075424C /* Debug */,

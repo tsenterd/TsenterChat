@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "DD1E57AD1D4D294B0075424C"
-               BuildableName = "Chat.app"
-               BlueprintName = "Chat"
-               ReferencedContainer = "container:Chat.xcodeproj">
+               BuildableName = "TsenterChat.app"
+               BlueprintName = "TsenterChat"
+               ReferencedContainer = "container:TsenterChat.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "DD1E57AD1D4D294B0075424C"
-            BuildableName = "Chat.app"
-            BlueprintName = "Chat"
-            ReferencedContainer = "container:Chat.xcodeproj">
+            BuildableName = "TsenterChat.app"
+            BlueprintName = "TsenterChat"
+            ReferencedContainer = "container:TsenterChat.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -56,9 +56,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "DD1E57AD1D4D294B0075424C"
-            BuildableName = "Chat.app"
-            BlueprintName = "Chat"
-            ReferencedContainer = "container:Chat.xcodeproj">
+            BuildableName = "TsenterChat.app"
+            BlueprintName = "TsenterChat"
+            ReferencedContainer = "container:TsenterChat.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -75,9 +75,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "DD1E57AD1D4D294B0075424C"
-            BuildableName = "Chat.app"
-            BlueprintName = "Chat"
-            ReferencedContainer = "container:Chat.xcodeproj">
+            BuildableName = "TsenterChat.app"
+            BlueprintName = "TsenterChat"
+            ReferencedContainer = "container:TsenterChat.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

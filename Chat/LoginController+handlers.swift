@@ -81,6 +81,7 @@ extension LoginController :UIImagePickerControllerDelegate,UINavigationControlle
             return
 
         }
+        
         FIRAuth.auth()?.createUserWithEmail(email, password: password, completion: {(user:FIRUser?,error) in
             if error != nil {
                 self.displayError(String(error))
