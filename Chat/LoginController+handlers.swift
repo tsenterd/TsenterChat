@@ -41,7 +41,13 @@ extension LoginController :UIImagePickerControllerDelegate,UINavigationControlle
             handleRegister()
         }
     }
-    
+    func displayError(err:String){
+        var mssg = String(err).characters.split("\"").map(String.init)
+        let alert = UIAlertController(title: "Error", message: mssg[1], preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+        self.presentViewController(alert, animated: true, completion: nil)
+
+    }
     func handleLogin(){
         guard let email = emailTextField.text,password = passwordTextField.text else{
             print ("Form Not Valid")
@@ -49,6 +55,7 @@ extension LoginController :UIImagePickerControllerDelegate,UINavigationControlle
         }
         FIRAuth.auth()?.signInWithEmail(email, password: password, completion: { (user, error) in
             if error != nil {
+                self.displayError(String(error))
                 print (error)
                 return
             }
@@ -67,8 +74,10 @@ extension LoginController :UIImagePickerControllerDelegate,UINavigationControlle
             print ("Form Not Valid")
             return
         }
+        
         FIRAuth.auth()?.createUserWithEmail(email, password: password, completion: {(user:FIRUser?,error) in
             if error != nil {
+                self.displayError(String(error))
                 print (error)
                 return
             }
@@ -80,6 +89,7 @@ extension LoginController :UIImagePickerControllerDelegate,UINavigationControlle
     
                 storageRef.putData(uploadData, metadata: nil, completion: { (metadata, err) in
                     if err != nil{
+                        self.displayError(String(error))
                         print(err)
                         return
                     }
@@ -105,6 +115,7 @@ extension LoginController :UIImagePickerControllerDelegate,UINavigationControlle
         let usersRef = ref.child("users").child(uid)
         usersRef.updateChildValues(values, withCompletionBlock: { (err, ref) in
             if err != nil {
+                self.displayError(String(err))
                 print (err)
                 return
             }

@@ -10,6 +10,7 @@ import UIKit
 import Firebase
 class ChatLogController: UICollectionViewController, UITextFieldDelegate,UICollectionViewDelegateFlowLayout {
     
+    var containerViewBottomAnchor:NSLayoutConstraint?
     
     var user:User? {
         didSet{
@@ -63,55 +64,93 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate,UIColle
         collectionView?.backgroundColor = UIColor.whiteColor()
         collectionView?.registerClass(ChatMessageCell.self, forCellWithReuseIdentifier: cellId)
         
-        collectionView?.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 58, right: 0)
-        collectionView?.scrollIndicatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: 50, right: 0)
-        setupInputComponents()
+        collectionView?.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0)
+        //collectionView?.scrollIndicatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: 50, right: 0)
+        
+        //setupInputComponents()
+        //setupKeyboardObservers()
     }
     
-    func setupInputComponents(){
-    
+    lazy var inputContainerView: UIView = {
         let containerView = UIView()
-        containerView.translatesAutoresizingMaskIntoConstraints = false
+        containerView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 50)
         containerView.backgroundColor = UIColor.whiteColor()
-        view.addSubview(containerView)
-        
-        containerView.leftAnchor.constraintEqualToAnchor(view.leftAnchor).active = true
-        containerView.bottomAnchor.constraintEqualToAnchor(view.bottomAnchor).active = true
-        containerView.widthAnchor.constraintEqualToAnchor(view.widthAnchor).active = true
-        containerView.heightAnchor.constraintEqualToConstant(50).active = true
-    
         
         let sendButton = UIButton(type: .System)
         sendButton.setTitle("Send", forState: .Normal)
-        sendButton.translatesAutoresizingMaskIntoConstraints = false;
+        sendButton.translatesAutoresizingMaskIntoConstraints = false
         sendButton.addTarget(self, action: #selector(handleSend), forControlEvents: .TouchUpInside)
         containerView.addSubview(sendButton)
-        
+        //x,y,w,h
         sendButton.rightAnchor.constraintEqualToAnchor(containerView.rightAnchor).active = true
         sendButton.centerYAnchor.constraintEqualToAnchor(containerView.centerYAnchor).active = true
         sendButton.widthAnchor.constraintEqualToConstant(80).active = true
         sendButton.heightAnchor.constraintEqualToAnchor(containerView.heightAnchor).active = true
         
-       
+        containerView.addSubview(self.inputTextField)
+        //x,y,w,h
+        self.inputTextField.leftAnchor.constraintEqualToAnchor(containerView.leftAnchor, constant: 8).active = true
+        self.inputTextField.centerYAnchor.constraintEqualToAnchor(containerView.centerYAnchor).active = true
+        self.inputTextField.rightAnchor.constraintEqualToAnchor(sendButton.leftAnchor).active = true
+        self.inputTextField.heightAnchor.constraintEqualToAnchor(containerView.heightAnchor).active = true
         
-        containerView.addSubview(inputTextField)
+        let separatorLineView = UIView()
+        separatorLineView.backgroundColor = UIColor(r: 220, g: 220, b: 220)
+        separatorLineView.translatesAutoresizingMaskIntoConstraints = false
+        containerView.addSubview(separatorLineView)
+        //x,y,w,h
+        separatorLineView.leftAnchor.constraintEqualToAnchor(containerView.leftAnchor).active = true
+        separatorLineView.topAnchor.constraintEqualToAnchor(containerView.topAnchor).active = true
+        separatorLineView.widthAnchor.constraintEqualToAnchor(containerView.widthAnchor).active = true
+        separatorLineView.heightAnchor.constraintEqualToConstant(1).active = true
         
-        inputTextField.leftAnchor.constraintEqualToAnchor(containerView.leftAnchor,constant: 8).active = true
-        inputTextField.centerYAnchor.constraintEqualToAnchor(containerView.centerYAnchor).active = true
-        inputTextField.heightAnchor.constraintEqualToAnchor(containerView.heightAnchor).active = true
-        inputTextField.rightAnchor.constraintEqualToAnchor(sendButton.leftAnchor).active = true
+        return containerView
+    }()
+    
+    override var inputAccessoryView: UIView? {
+        get {
+            return inputContainerView
+        }
+    }
+    
+    override func canBecomeFirstResponder() -> Bool {
+        return true
+    }
+    
+    func setupKeyboardObservers(){
+    
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(handleKeyboardWillShow), name: UIKeyboardWillShowNotification, object: nil)
         
-        let separatorLine = UIView()
-        separatorLine.backgroundColor = UIColor(r: 220, g: 220, b: 220)
-        separatorLine.translatesAutoresizingMaskIntoConstraints = false;
-        containerView.addSubview(separatorLine)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(handleKeyboardWillHide), name: UIKeyboardWillHideNotification, object: nil)
+    }
+    
+    func handleKeyboardWillShow (notification: NSNotification) {
         
-        separatorLine.leftAnchor.constraintEqualToAnchor(containerView.leftAnchor).active = true
-        separatorLine.topAnchor.constraintEqualToAnchor(containerView.topAnchor).active = true
-        separatorLine.widthAnchor.constraintEqualToAnchor(containerView.widthAnchor).active = true
-        separatorLine.heightAnchor.constraintEqualToConstant(1).active = true
+        let keyboardFrame = notification.userInfo?[UIKeyboardFrameBeginUserInfoKey]?.CGRectValue()
+        
+        let keyboardDuration = notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey]?.doubleValue
+        
+        containerViewBottomAnchor?.constant = -keyboardFrame!.height
+        UIView.animateWithDuration(keyboardDuration!){
+            self.view.layoutIfNeeded()
+        }
+        //move input area up
         
     }
+    func handleKeyboardWillHide (notification: NSNotification) {
+        let keyboardDuration = notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey]?.doubleValue
+
+        UIView.animateWithDuration(keyboardDuration!){
+            self.view.layoutIfNeeded()
+        }
+        containerViewBottomAnchor?.constant = 0
+        
+    }
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+   
     func handleSend(){
         if inputTextField.text != nil && inputTextField.text != ""{
         let reference = FIRDatabase.database().reference().child("messages")
