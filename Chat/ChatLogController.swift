@@ -21,9 +21,9 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate,UIColle
     }
     var messages = [Message]()
     func observeMessages(){
-        guard let uid = FIRAuth.auth()?.currentUser?.uid else {return}
+        guard let uid = FIRAuth.auth()?.currentUser?.uid , toId = user?.id else {return}
         
-        let userMessageRef = FIRDatabase.database().reference().child("user-messages").child(uid)
+        let userMessageRef = FIRDatabase.database().reference().child("user-messages").child(uid).child(toId)
         
         userMessageRef.observeEventType(.ChildAdded, withBlock: { (snapshot) in
             
@@ -169,13 +169,13 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate,UIColle
             
             self.inputTextField.text = nil
             
-            let userMessagesRef = FIRDatabase.database().reference().child("user-messages").child(fromId)
+            let userMessagesRef = FIRDatabase.database().reference().child("user-messages").child(fromId).child(toId)
             
             let messageId = childRef.key
             userMessagesRef.updateChildValues([messageId:1])
             
             
-            let recepientRef = FIRDatabase.database().reference().child("user-messages").child(toId)
+            let recepientRef = FIRDatabase.database().reference().child("user-messages").child(toId).child(fromId)
             recepientRef.updateChildValues([messageId:1])
             
         }
