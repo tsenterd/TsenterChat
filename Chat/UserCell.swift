@@ -12,23 +12,7 @@ class UserCell: UITableViewCell {
     
     var message:Message?{
         didSet{
-            if let toId = message?.toId{
-                
-                let ref = FIRDatabase.database().reference().child("users").child(toId)
-                
-                ref.observeSingleEventOfType(.Value, withBlock: { (snapshot) in
-                    if let dict = snapshot.value as? [String:AnyObject]{
-                        self.textLabel?.text = dict["name"] as? String
-                        
-                        if let profileImageUrl = dict["profileImageUrl"] as? String{
-                            self.profileImageView.loadImageUsingCache(profileImageUrl)
-                            
-                        }
-                        
-                    }
-                })
-                
-            }
+            setupNameAndProfileImage()
             detailTextLabel?.text = message?.text
             
             if let seconds = message?.timestamp?.doubleValue{
@@ -43,6 +27,26 @@ class UserCell: UITableViewCell {
         }
     }
     
+    private func setupNameAndProfileImage(){
+        
+        if let id = message?.chatPartnerId(){
+            
+            let ref = FIRDatabase.database().reference().child("users").child(id)
+            
+            ref.observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+                if let dict = snapshot.value as? [String:AnyObject]{
+                    self.textLabel?.text = dict["name"] as? String
+                    
+                    if let profileImageUrl = dict["profileImageUrl"] as? String{
+                        self.profileImageView.loadImageUsingCache(profileImageUrl)
+                        
+                    }
+                    
+                }
+            })
+            
+        }
+    }
     
     let profileImageView:UIImageView = {
         let imageView = UIImageView()

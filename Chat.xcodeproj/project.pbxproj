@@ -22,6 +22,7 @@
 		DDC6455B1D4D7F5D00E30EA4 /* ChatLogController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC6455A1D4D7F5D00E30EA4 /* ChatLogController.swift */; };
 		DDC6455D1D4DC68900E30EA4 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC6455C1D4DC68900E30EA4 /* Message.swift */; };
 		DDC645601D4DCCAA00E30EA4 /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC6455F1D4DCCAA00E30EA4 /* UserCell.swift */; };
+		DDC645621D4E59DD00E30EA4 /* ChatMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC645611D4E59DD00E30EA4 /* ChatMessageCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +44,7 @@
 		DDC6455A1D4D7F5D00E30EA4 /* ChatLogController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatLogController.swift; sourceTree = "<group>"; };
 		DDC6455C1D4DC68900E30EA4 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		DDC6455F1D4DCCAA00E30EA4 /* UserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
+		DDC645611D4E59DD00E30EA4 /* ChatMessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatMessageCell.swift; sourceTree = "<group>"; };
 		E17E67142C13E3E4B41FF5D5 /* Pods-Chat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chat.release.xcconfig"; path = "Pods/Target Support Files/Pods-Chat/Pods-Chat.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -143,6 +145,7 @@
 			isa = PBXGroup;
 			children = (
 				DDC6455F1D4DCCAA00E30EA4 /* UserCell.swift */,
+				DDC645611D4E59DD00E30EA4 /* ChatMessageCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -277,6 +280,7 @@
 				DDC645561D4D62C500E30EA4 /* LoginController+handlers.swift in Sources */,
 				DD1E57C51D4D2BF00075424C /* LoginController.swift in Sources */,
 				DDC645541D4D5EFA00E30EA4 /* User.swift in Sources */,
+				DDC645621D4E59DD00E30EA4 /* ChatMessageCell.swift in Sources */,
 				DD1E57B21D4D294B0075424C /* AppDelegate.swift in Sources */,
 				DDC645601D4DCCAA00E30EA4 /* UserCell.swift in Sources */,
 				DDC645591D4D70EB00E30EA4 /* Extensions.swift in Sources */,

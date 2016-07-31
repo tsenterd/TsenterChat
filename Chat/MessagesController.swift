@@ -12,6 +12,8 @@ class MessagesController: UITableViewController {
 
     
     let cellId = "cellId"
+    var messages = [Message]()
+    var messagesDict = [String:Message]()
     
     
     override func viewDidLoad() {
@@ -25,37 +27,62 @@ class MessagesController: UITableViewController {
         
         tableView.registerClass(UserCell.self, forCellReuseIdentifier: cellId)
         
-        observeMessages()
+        //observeMessages()
+       
         
     }
-    
-    var messages = [Message]()
-    var messagesDict = [String:Message]()
-    func observeMessages(){
-        let ref = FIRDatabase.database().reference().child("messages")
+
+    func observeUserMessages(){
+        
+        guard let uid = FIRAuth.auth()?.currentUser?.uid else {
+            return
+        }
+        let ref = FIRDatabase.database().reference().child("user-messages").child(uid)
+        
         ref.observeEventType(.ChildAdded, withBlock: { (snapshot) in
             
-            if let dict = snapshot.value as? [String:AnyObject]{
+            let messageId = snapshot.key
+            let messagesRef = FIRDatabase.database().reference().child("messages").child(messageId)
+            
+            messagesRef.observeSingleEventOfType(.Value, withBlock: { (snapshot) in
                 
-                let message = Message()
-                message.setValuesForKeysWithDictionary(dict)
-                self.messages.append(message)
-                
-                if let toId = message.toId{
-                    self.messagesDict[toId] = message
+                if let dict = snapshot.value as? [String:AnyObject]{
+                    
+                    let message = Message()
+                    message.setValuesForKeysWithDictionary(dict)
+                    
+                    
+                    if let toId = message.chatPartnerId(){
+                        self.messagesDict[toId] = message
+                        
+                        self.messages = Array(self.messagesDict.values)
+                        
+                        self.messages.sortInPlace({ (message1, message2) -> Bool in
+                            return message1.timestamp?.intValue>message2.timestamp?.intValue
+                        })
+                    }
+                    
+                    self.timer?.invalidate()
+                    self.timer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: #selector(self.handleReloadTable), userInfo: nil, repeats: false)
+                    
+                    
+                    
                 }
-    
-                dispatch_async(dispatch_get_main_queue(), { 
-                    self.tableView.reloadData()
-                })
                 
-            }
-            
-            
+                }, withCancelBlock: nil)
             
             }, withCancelBlock: nil)
     }
     
+    var timer: NSTimer?
+    
+    
+    func handleReloadTable()
+    {
+        dispatch_async(dispatch_get_main_queue(), {
+            self.tableView.reloadData()
+        })
+    }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return messages.count
@@ -75,6 +102,28 @@ class MessagesController: UITableViewController {
         cell.message = message
        
         return cell
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        let message = messages[indexPath.row]
+        
+        guard let chatPartnerId = message.chatPartnerId() else { return}
+        
+        let ref = FIRDatabase.database().reference().child("users").child(chatPartnerId)
+        ref.observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+            guard let dict = snapshot.value as? [String:AnyObject] else{return}
+            
+            let user = User()
+            user.id = chatPartnerId
+            user.setValuesForKeysWithDictionary(dict)
+            
+            self.showChatControllerForUser(user)
+            
+            
+            }, withCancelBlock: nil)
+        
+        
     }
     
     func handleNewMessage(){
@@ -111,6 +160,13 @@ class MessagesController: UITableViewController {
     }
     
     func setupNavBarWithUser(user:User){
+        
+        messages.removeAll()
+        messagesDict.removeAll()
+        tableView.reloadData()
+        
+        //using 'fanning out' design pattern recommended by firebase engineers
+        observeUserMessages()
         
         let titleView = UIView()
         
