@@ -4,6 +4,28 @@ class LoginController: UIViewController {
     
     var  messagesController: MessagesController?
     
+    let titleTextView:UITextView = {
+        let textView = UITextView()
+        textView.translatesAutoresizingMaskIntoConstraints = false
+        textView.text = "TsenterChat 1.0"
+        textView.textAlignment = .Center
+        textView.font = UIFont.boldSystemFontOfSize(24)
+        textView.textColor = UIColor.whiteColor()
+        textView.editable = false
+        textView.backgroundColor = UIColor.clearColor()
+        return textView
+    }()
+    let hintTextView:UITextView = {
+        let textView = UITextView()
+        textView.translatesAutoresizingMaskIntoConstraints = false
+        textView.text = "Tap the top image to change your profile picture when registering!"
+        textView.textAlignment = .Center
+        textView.font = UIFont.boldSystemFontOfSize(12)
+        textView.textColor = UIColor.whiteColor()
+        textView.editable = false
+        textView.backgroundColor = UIColor.clearColor()
+        return textView
+    }()
     let inputsContainerView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor.whiteColor()
@@ -109,10 +131,24 @@ class LoginController: UIViewController {
         
         view.backgroundColor = UIColor(r: 61, g: 91, b: 151)
         
+        view.addSubview(titleTextView)
+        view.addSubview(hintTextView)
         view.addSubview(inputsContainerView)
         view.addSubview(loginRegisterButton)
         view.addSubview(profileImageView)
         view.addSubview(loginRegisterSegControl)
+        
+        titleTextView.centerYAnchor.constraintEqualToAnchor(view.centerYAnchor,constant: -280).active = true
+        titleTextView.bottomAnchor.constraintEqualToAnchor(profileImageView.topAnchor).active = true
+        titleTextView.widthAnchor.constraintEqualToAnchor(view.widthAnchor).active = true
+        titleTextView.heightAnchor.constraintEqualToConstant(50).active = true
+        
+
+        
+        hintTextView.leftAnchor.constraintEqualToAnchor(inputsContainerView.leftAnchor).active = true
+        hintTextView.widthAnchor.constraintEqualToAnchor(view.widthAnchor).active = true
+        hintTextView.topAnchor.constraintEqualToAnchor(loginRegisterButton.bottomAnchor,constant: 12).active = true
+        hintTextView.heightAnchor.constraintEqualToConstant(50).active = true
         
         setupInputsContainerView()
         setupLoginRegisterButton()
@@ -126,6 +162,7 @@ class LoginController: UIViewController {
         profileImageView.bottomAnchor.constraintEqualToAnchor(loginRegisterSegControl.topAnchor, constant: -12).active = true
         profileImageView.widthAnchor.constraintEqualToConstant(150).active = true
         profileImageView.heightAnchor.constraintEqualToConstant(150).active = true
+        profileImageView.topAnchor.constraintEqualToAnchor(titleTextView.bottomAnchor)
     }
     
     var inputContainterViewHeightConstraint: NSLayoutConstraint?
@@ -133,9 +170,11 @@ class LoginController: UIViewController {
     var emailTextFieldHeightAnchor:NSLayoutConstraint?
     var passwordTextFieldHeightAnchor:NSLayoutConstraint?
     func setupInputsContainerView() {
+        
+        
         //need x, y, width, height constraints
         inputsContainerView.centerXAnchor.constraintEqualToAnchor(view.centerXAnchor).active = true
-        inputsContainerView.centerYAnchor.constraintEqualToAnchor(view.centerYAnchor).active = true
+        inputsContainerView.topAnchor.constraintEqualToAnchor(loginRegisterSegControl.bottomAnchor,constant: 8).active = true
         inputsContainerView.widthAnchor.constraintEqualToAnchor(view.widthAnchor, constant: -24).active = true
         inputContainterViewHeightConstraint = inputsContainerView.heightAnchor.constraintEqualToConstant(150)
         inputContainterViewHeightConstraint?.active = true

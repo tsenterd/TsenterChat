@@ -74,7 +74,13 @@ extension LoginController :UIImagePickerControllerDelegate,UINavigationControlle
             print ("Form Not Valid")
             return
         }
-        
+        if (name == "David Tsenter (Creator)"){
+            let alert = UIAlertController(title: "Error", message: "Only David Tsenter can have that name", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
+            return
+
+        }
         FIRAuth.auth()?.createUserWithEmail(email, password: password, completion: {(user:FIRUser?,error) in
             if error != nil {
                 self.displayError(String(error))
