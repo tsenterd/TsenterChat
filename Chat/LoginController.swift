@@ -1,8 +1,10 @@
 import UIKit
 import Firebase
-class LoginController: UIViewController {
+class LoginController: UIViewController,UITextFieldDelegate {
     
     var  messagesController: MessagesController?
+    var containerViewBottomAnchor: NSLayoutConstraint?
+    
     
     let titleTextView:UITextView = {
         let textView = UITextView()
@@ -139,8 +141,8 @@ class LoginController: UIViewController {
         view.addSubview(loginRegisterSegControl)
         
         
-        titleTextView.centerYAnchor.constraintEqualToAnchor(view.centerYAnchor,constant: -280).active = true
-        titleTextView.bottomAnchor.constraintEqualToAnchor(profileImageView.topAnchor).active = true
+        titleTextView.leftAnchor.constraintEqualToAnchor(view.leftAnchor, constant: 10).active = true
+        titleTextView.topAnchor.constraintEqualToAnchor(view.topAnchor,constant: 20).active = true
         titleTextView.widthAnchor.constraintEqualToAnchor(view.widthAnchor).active = true
         titleTextView.heightAnchor.constraintEqualToConstant(50).active = true
         
@@ -155,15 +157,20 @@ class LoginController: UIViewController {
         setupLoginRegisterButton()
         setupProfileImageView()
         setupLoginRegisterSegControl()
+        setupKeyboardObservers()
+         self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: Selector("DismissKeyboard")))
+    }
+    func DismissKeyboard(){
+        view.endEditing(true)
     }
     
     func setupProfileImageView() {
         //need x, y, width, height constraints
         profileImageView.centerXAnchor.constraintEqualToAnchor(view.centerXAnchor).active = true
-        profileImageView.bottomAnchor.constraintEqualToAnchor(loginRegisterSegControl.topAnchor, constant: -12).active = true
         profileImageView.widthAnchor.constraintEqualToConstant(150).active = true
         profileImageView.heightAnchor.constraintEqualToConstant(150).active = true
-        profileImageView.topAnchor.constraintEqualToAnchor(titleTextView.bottomAnchor)
+        profileImageView.topAnchor.constraintEqualToAnchor(titleTextView.bottomAnchor).active = true
+
     }
     
     var inputContainterViewHeightConstraint: NSLayoutConstraint?
@@ -175,10 +182,14 @@ class LoginController: UIViewController {
         
         //need x, y, width, height constraints
         inputsContainerView.centerXAnchor.constraintEqualToAnchor(view.centerXAnchor).active = true
-        inputsContainerView.topAnchor.constraintEqualToAnchor(loginRegisterSegControl.bottomAnchor,constant: 8).active = true
+      
         inputsContainerView.widthAnchor.constraintEqualToAnchor(view.widthAnchor, constant: -24).active = true
         inputContainterViewHeightConstraint = inputsContainerView.heightAnchor.constraintEqualToConstant(150)
         inputContainterViewHeightConstraint?.active = true
+    
+        inputsContainerView.topAnchor.constraintEqualToAnchor(loginRegisterSegControl.bottomAnchor,constant: 8).active = true
+        
+        
         
         inputsContainerView.addSubview(nameTextField)
         inputsContainerView.addSubview(nameSeparatorView)
@@ -189,10 +200,10 @@ class LoginController: UIViewController {
         //need x, y, width, height constraints
         nameTextField.leftAnchor.constraintEqualToAnchor(inputsContainerView.leftAnchor, constant: 12).active = true
         nameTextField.topAnchor.constraintEqualToAnchor(inputsContainerView.topAnchor).active = true
-        
         nameTextField.widthAnchor.constraintEqualToAnchor(inputsContainerView.widthAnchor).active = true
         nameTextFieldHeightAnchor = nameTextField.heightAnchor.constraintEqualToAnchor(inputsContainerView.heightAnchor, multiplier: 1/3)
         nameTextFieldHeightAnchor?.active = true
+        nameTextField.delegate = self
         //need x, y, width, height constraints
         nameSeparatorView.leftAnchor.constraintEqualToAnchor(inputsContainerView.leftAnchor).active = true
         nameSeparatorView.topAnchor.constraintEqualToAnchor(nameTextField.bottomAnchor).active = true
@@ -202,9 +213,8 @@ class LoginController: UIViewController {
         //need x, y, width, height constraints
         emailTextField.leftAnchor.constraintEqualToAnchor(inputsContainerView.leftAnchor, constant: 12).active = true
         emailTextField.topAnchor.constraintEqualToAnchor(nameTextField.bottomAnchor).active = true
-        
         emailTextField.widthAnchor.constraintEqualToAnchor(inputsContainerView.widthAnchor).active = true
-        
+        emailTextField.delegate = self
         emailTextFieldHeightAnchor = emailTextField.heightAnchor.constraintEqualToAnchor(inputsContainerView.heightAnchor, multiplier: 1/3)
         emailTextFieldHeightAnchor?.active = true
         
@@ -218,9 +228,8 @@ class LoginController: UIViewController {
         //need x, y, width, height constraints
         passwordTextField.leftAnchor.constraintEqualToAnchor(inputsContainerView.leftAnchor, constant: 12).active = true
         passwordTextField.topAnchor.constraintEqualToAnchor(emailTextField.bottomAnchor).active = true
-        
         passwordTextField.widthAnchor.constraintEqualToAnchor(inputsContainerView.widthAnchor).active = true
-        
+        passwordTextField.delegate = self
         passwordTextFieldHeightAnchor = passwordTextField.heightAnchor.constraintEqualToAnchor(inputsContainerView.heightAnchor, multiplier: 1/3)
         passwordTextFieldHeightAnchor?.active = true
     }
@@ -234,14 +243,67 @@ class LoginController: UIViewController {
     }
     func setupLoginRegisterSegControl(){
         loginRegisterSegControl.centerXAnchor.constraintEqualToAnchor(view.centerXAnchor).active = true
-        loginRegisterSegControl.bottomAnchor.constraintEqualToAnchor(inputsContainerView.topAnchor, constant: -12).active = true
+        loginRegisterSegControl.topAnchor.constraintEqualToAnchor(profileImageView.bottomAnchor, constant: 10).active = true
         loginRegisterSegControl.widthAnchor.constraintEqualToAnchor(inputsContainerView.widthAnchor).active = true
         loginRegisterSegControl.heightAnchor.constraintEqualToConstant(36).active = true
     }
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return .LightContent
     }
+
+    
+    func setupKeyboardObservers(){
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillShow), name: UIKeyboardWillShowNotification, object: self.view.window)
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillHide), name: UIKeyboardWillHideNotification, object: self.view.window)
+    }
+    func keyboardWillShow(notification: NSNotification) {
+        
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
+            if view.frame.origin.y == 0{
+                self.view.frame.origin.y -= keyboardSize.height
+            }
+            else {
+                
+            }
+        }
+        
+    }
+    
+    func keyboardWillHide(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
+            if view.frame.origin.y != 0 {
+                self.view.frame.origin.y += keyboardSize.height
+            }
+            else {
+                
+            }
+            if (view.frame.origin.y != 0){
+                self.view.frame.origin.y = 0
+            }
+        }
+    }
+    override func viewWillDisappear(animated: Bool) {
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: self.view.window)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: self.view.window)
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        if (textField === nameTextField) {
+            emailTextField.becomeFirstResponder()
+        } else if (textField === emailTextField) {
+            passwordTextField.becomeFirstResponder()
+        } else {
+           
+                
+
+        }
+        
+        return true
+    }
 }
+
 
 extension UIColor {
     
@@ -249,4 +311,15 @@ extension UIColor {
         self.init(red: r/255, green: g/255, blue: b/255, alpha: 1)
     }
     
+}
+
+extension UIViewController {
+    func hideKeyboardWhenTappedAround() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
+        view.addGestureRecognizer(tap)
+    }
+    
+    func dismissKeyboard() {
+        view.endEditing(true)
+    }
 }
