@@ -7,14 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B98CD0FDB7E05FCE7E1551DD /* Pods_Chat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A00A1BD968EE8C7DD4B0EB03 /* Pods_Chat.framework */; };
+		63EEBB921D564CBE00D08805 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 63EEBB911D564CBE00D08805 /* GoogleService-Info.plist */; };
 		DD1E57B21D4D294B0075424C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1E57B11D4D294B0075424C /* AppDelegate.swift */; };
 		DD1E57B41D4D294B0075424C /* MessagesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1E57B31D4D294B0075424C /* MessagesController.swift */; };
 		DD1E57B71D4D294B0075424C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD1E57B51D4D294B0075424C /* Main.storyboard */; };
 		DD1E57B91D4D294B0075424C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD1E57B81D4D294B0075424C /* Assets.xcassets */; };
 		DD1E57BC1D4D294B0075424C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD1E57BA1D4D294B0075424C /* LaunchScreen.storyboard */; };
 		DD1E57C51D4D2BF00075424C /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1E57C41D4D2BF00075424C /* LoginController.swift */; };
-		DD1E57C71D4D42B70075424C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DD1E57C61D4D42B70075424C /* GoogleService-Info.plist */; };
 		DD1E57C91D4D5B470075424C /* NewMessageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1E57C81D4D5B470075424C /* NewMessageController.swift */; };
 		DDC645541D4D5EFA00E30EA4 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC645531D4D5EFA00E30EA4 /* User.swift */; };
 		DDC645561D4D62C500E30EA4 /* LoginController+handlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC645551D4D62C500E30EA4 /* LoginController+handlers.swift */; };
@@ -23,9 +22,14 @@
 		DDC6455D1D4DC68900E30EA4 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC6455C1D4DC68900E30EA4 /* Message.swift */; };
 		DDC645601D4DCCAA00E30EA4 /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC6455F1D4DCCAA00E30EA4 /* UserCell.swift */; };
 		DDC645621D4E59DD00E30EA4 /* ChatMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC645611D4E59DD00E30EA4 /* ChatMessageCell.swift */; };
+		FC4C0AFE08A183087AE65933 /* Pods_TsenterChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 837A6BD8072B1208E920BEF5 /* Pods_TsenterChat.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3D6912DFED13116938EB86CD /* Pods-TsenterChat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TsenterChat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TsenterChat/Pods-TsenterChat.debug.xcconfig"; sourceTree = "<group>"; };
+		6283FFB59390369202889BFB /* Pods-TsenterChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TsenterChat.release.xcconfig"; path = "Pods/Target Support Files/Pods-TsenterChat/Pods-TsenterChat.release.xcconfig"; sourceTree = "<group>"; };
+		63EEBB911D564CBE00D08805 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		837A6BD8072B1208E920BEF5 /* Pods_TsenterChat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TsenterChat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A00A1BD968EE8C7DD4B0EB03 /* Pods_Chat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Chat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC13D2EFDDD61F7D38A59BE3 /* Pods-Chat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Chat/Pods-Chat.debug.xcconfig"; sourceTree = "<group>"; };
 		DD1E57AE1D4D294B0075424C /* TsenterChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TsenterChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -53,7 +57,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B98CD0FDB7E05FCE7E1551DD /* Pods_Chat.framework in Frameworks */,
+				FC4C0AFE08A183087AE65933 /* Pods_TsenterChat.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -65,6 +69,8 @@
 			children = (
 				CC13D2EFDDD61F7D38A59BE3 /* Pods-Chat.debug.xcconfig */,
 				E17E67142C13E3E4B41FF5D5 /* Pods-Chat.release.xcconfig */,
+				3D6912DFED13116938EB86CD /* Pods-TsenterChat.debug.xcconfig */,
+				6283FFB59390369202889BFB /* Pods-TsenterChat.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -73,6 +79,7 @@
 			isa = PBXGroup;
 			children = (
 				A00A1BD968EE8C7DD4B0EB03 /* Pods_Chat.framework */,
+				837A6BD8072B1208E920BEF5 /* Pods_TsenterChat.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -80,6 +87,7 @@
 		DD1E57A51D4D294B0075424C = {
 			isa = PBXGroup;
 			children = (
+				63EEBB911D564CBE00D08805 /* GoogleService-Info.plist */,
 				DD1E57B01D4D294B0075424C /* TsenterChat */,
 				DD1E57AF1D4D294B0075424C /* Products */,
 				24AFAF2E547855BCF9283C42 /* Pods */,
@@ -213,8 +221,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				63EEBB921D564CBE00D08805 /* GoogleService-Info.plist in Resources */,
 				DD1E57BC1D4D294B0075424C /* LaunchScreen.storyboard in Resources */,
-				DD1E57C71D4D42B70075424C /* GoogleService-Info.plist in Resources */,
 				DD1E57B91D4D294B0075424C /* Assets.xcassets in Resources */,
 				DD1E57B71D4D294B0075424C /* Main.storyboard in Resources */,
 			);
@@ -250,7 +258,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Chat/Pods-Chat-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TsenterChat/Pods-TsenterChat-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		F7407C543A005A95BED826BC /* [CP] Embed Pods Frameworks */ = {
@@ -265,7 +273,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Chat/Pods-Chat-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TsenterChat/Pods-TsenterChat-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -398,7 +406,7 @@
 		};
 		DD1E57C11D4D294B0075424C /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CC13D2EFDDD61F7D38A59BE3 /* Pods-Chat.debug.xcconfig */;
+			baseConfigurationReference = 3D6912DFED13116938EB86CD /* Pods-TsenterChat.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -413,7 +421,7 @@
 		};
 		DD1E57C21D4D294B0075424C /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E17E67142C13E3E4B41FF5D5 /* Pods-Chat.release.xcconfig */;
+			baseConfigurationReference = 6283FFB59390369202889BFB /* Pods-TsenterChat.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
